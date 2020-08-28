@@ -1,4 +1,4 @@
-#API to compute SHA-512 hash for secrets
+# API to compute SHA-512 hash for secrets
 This API module makes several end points available to compute, fetch hash and retrieve statistics of the hash ops.
 
 The service exposes following end points :
