@@ -40,6 +40,7 @@ func Boot() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	mux.Handle("/hash", logger(execTimer(handler.HashHandler(ctx))))
+	// optimize this to bind handler with wild card /hash/* pattern
 	mux.Handle("/hash/", logger(handler.HashHandler(ctx)))
 	mux.Handle("/stats", logger(handler.StatsHandler()))
 	mux.Handle("/shutdown", handler.ShutdownHandler(cancel))
