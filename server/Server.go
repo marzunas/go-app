@@ -14,6 +14,7 @@ import (
 
 var cfg = conf.GetConfig()
 
+// interceptor to log request and response
 func logger(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Println("request: " + r.RequestURI)
@@ -21,6 +22,7 @@ func logger(h http.Handler) http.Handler {
 	})
 }
 
+// interceptor to track execution times
 func execTimer(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
@@ -34,6 +36,7 @@ func Boot() {
 	log.Println("initializing http server")
 	mux := http.NewServeMux()
 	server := &http.Server{Addr: ":" + strconv.Itoa(cfg.Port), Handler: mux}
+	// create cancel hook
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	mux.Handle("/hash", logger(execTimer(handler.HashHandler(ctx))))
