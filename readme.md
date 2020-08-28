@@ -31,7 +31,6 @@ go build
 Run the application binary to start the service
 ```bash
 ./go-app
-./go-app
 2020/08/27 16:54:10 initializing http server
 starting server at port 8080
 ```
